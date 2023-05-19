@@ -1,8 +1,7 @@
 import { Component, inject } from '@angular/core'
 import { CommonModule } from '@angular/common'
-import { combineLatest, map, switchMap } from 'rxjs'
-import { towerNumberRouteParam$ } from '@grow-towers/towers'
-import { slotNumberRouteParam$ } from '../slot-number-route-param'
+import { combineLatest, switchMap } from 'rxjs'
+import { slotNumberRouteParam$, towerNumberRouteParam$ } from '@grow-towers/utils'
 import { TowerService } from '@grow-towers/simulation'
 
 @Component({
@@ -14,9 +13,12 @@ import { TowerService } from '@grow-towers/simulation'
 })
 export class SlotComponent {
   towerNumber$ = towerNumberRouteParam$()
+
   slotNumber$ = slotNumberRouteParam$()
+
   towerService = inject(TowerService)
+
   slot$ = combineLatest([this.towerNumber$, this.slotNumber$]).pipe(
-    switchMap(([towerNumber, slotNumber]) => this.towerService.getSlot(towerNumber, slotNumber))
+    switchMap(([towerNumber, slotNumber]) => this.towerService.getSlot(towerNumber, slotNumber)),
   )
 }

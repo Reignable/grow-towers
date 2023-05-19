@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
 import { SlotsComponent } from '@grow-towers/slots'
-import { towerNumberRouteParam$ } from '../tower-number-route-param'
+import { towerNumberRouteParam$ } from '@grow-towers/utils'
 
 @Component({
   selector: 'grow-towers-tower',
