@@ -21,4 +21,16 @@ export class TowerService {
       })
     )
   }
+
+  getTowersSummary() {
+    return this.towerData$.pipe(map(towers => towers.map(({ number }) => ({ number }))))
+  }
+
+  getTower(towerNumber: Tower['number']) {
+    return this.towerData$.pipe(map(towers => towers.find(tower => tower.number === towerNumber)))
+  }
+
+  getSlot(towerNumber: Tower['number'], slotNumber: Slot['number']) {
+    return this.getTower(towerNumber).pipe(map(tower => tower?.slots.find(slot => slot.number === slotNumber)))
+  }
 }
