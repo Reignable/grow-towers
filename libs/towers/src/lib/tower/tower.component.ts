@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
 import { CommonModule } from '@angular/common'
+import { Component } from '@angular/core'
+import { towerNumberRouteParam$ } from '../tower-number-route-param'
 
 @Component({
   selector: 'grow-towers-tower',
@@ -8,4 +9,6 @@ import { CommonModule } from '@angular/common'
   templateUrl: './tower.component.html',
   styleUrls: ['./tower.component.scss'],
 })
-export class TowerComponent {}
+export class TowerComponent {
+  towerNumber$ = towerNumberRouteParam$()
+}
