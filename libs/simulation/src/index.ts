@@ -1,2 +1,3 @@
-export * from './tower.service'
+export * from './growth-job-name'
 export * from './slot'
+export * from './tower.service'

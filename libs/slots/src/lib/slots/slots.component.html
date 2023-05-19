@@ -1,1 +1,5 @@
-<grow-towers-slot-card *ngFor="let slot of slots$ | async; trackBy: trackBy" [slot]="slot" />
+<grow-towers-growth-job-filter [control]="growthJobNameFilter" />
+<grow-towers-slot-card
+  *ngFor="let slot of filteredSlots$ | async; trackBy: trackBy"
+  [slot]="slot"
+/>

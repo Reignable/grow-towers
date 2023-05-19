@@ -1,16 +1,18 @@
 import { CommonModule } from '@angular/common'
 import { Component, inject } from '@angular/core'
 import { RouterLink } from '@angular/router'
-import { Slot, TowerService } from '@grow-towers/simulation'
+import { GrowthJobName, Slot, TowerService } from '@grow-towers/simulation'
 import { towerNumberRouteParam$ } from '@grow-towers/towers'
 import { CardModule } from 'primeng/card'
-import { map, switchMap } from 'rxjs'
+import { combineLatest, map, startWith, switchMap } from 'rxjs'
+import { FormControl } from '@angular/forms'
 import { SlotCardComponent } from '../slot-card/slot-card.component'
+import { GrowthJobFilterComponent } from './growth-job-filter/growth-job-filter.component'
 
 @Component({
   selector: 'grow-towers-slots',
   standalone: true,
-  imports: [CardModule, CommonModule, RouterLink, SlotCardComponent],
+  imports: [CardModule, CommonModule, GrowthJobFilterComponent, RouterLink, SlotCardComponent],
   templateUrl: './slots.component.html',
   styleUrls: ['./slots.component.scss'],
 })
@@ -19,9 +21,21 @@ export class SlotsComponent {
 
   towerService = inject(TowerService)
 
+  growthJobNameFilter = new FormControl<GrowthJobName | null>(null)
+
   slots$ = this.towerNumber$.pipe(
     switchMap(towerNumber => this.towerService.getTower(towerNumber)),
     map(tower => tower?.slots),
+  )
+
+  filteredSlots$ = combineLatest([
+    this.slots$,
+    this.growthJobNameFilter.valueChanges.pipe(startWith(null)),
+  ]).pipe(
+    map(([slots, growthJobNameFilter]) => {
+      if (!growthJobNameFilter) return slots
+      return slots?.filter(slot => slot.growthTray?.growthJob?.name === growthJobNameFilter)
+    }),
   )
 
   trackBy(index: number, slot: Slot): number {
