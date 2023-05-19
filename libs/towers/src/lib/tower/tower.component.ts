@@ -1,22 +1,15 @@
 import { CommonModule } from '@angular/common'
-import { Component, inject } from '@angular/core'
+import { Component } from '@angular/core'
+import { SlotsComponent } from '@grow-towers/slots'
 import { towerNumberRouteParam$ } from '../tower-number-route-param'
-import { map, switchMap } from 'rxjs'
-import { TowerService } from '@grow-towers/simulation'
-import { RouterLink } from '@angular/router'
 
 @Component({
   selector: 'grow-towers-tower',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, SlotsComponent],
   templateUrl: './tower.component.html',
   styleUrls: ['./tower.component.scss'],
 })
 export class TowerComponent {
   towerNumber$ = towerNumberRouteParam$()
-  towerService = inject(TowerService)
-  slots$ = this.towerNumber$.pipe(
-    switchMap(towerNumber => this.towerService.getTower(towerNumber)),
-    map(tower => tower?.slots)
-  )
 }
