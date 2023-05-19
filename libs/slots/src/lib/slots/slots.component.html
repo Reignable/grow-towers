@@ -1,6 +1,8 @@
-<grow-towers-growth-job-filter [control]="growthJobNameFilter" />
-<grow-towers-slots-sort [control]="slotSort" />
+<div class="controls">
+  <grow-towers-growth-job-filter [control]="growthJobNameFilter" />
+  <grow-towers-slots-sort [control]="slotSort" />
+</div>
 <grow-towers-slot-card
-  *ngFor="let slot of sortedSlots$ | async; trackBy: trackBy"
+  *ngFor="let slot of sortedSlots$ | async; trackBy: trackBySlotNumber"
   [slot]="slot"
 />
