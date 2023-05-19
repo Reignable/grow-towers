@@ -1,1 +1,1 @@
-<a *ngFor="let slot of slots$ | async" [routerLink]="['slots', slot.number]">Slot {{slot.number}}</a>
+<grow-towers-slot-card *ngFor="let slot of slots$ | async; trackBy: trackBy" [slot]="slot" />
