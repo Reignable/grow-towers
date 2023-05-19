@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@grow-towers/simulation": ["libs/simulation/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
