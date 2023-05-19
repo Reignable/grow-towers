@@ -17,10 +17,15 @@
         "tsConfig": "apps/tower-monitor/tsconfig.app.json",
         "assets": [
           "apps/tower-monitor/src/favicon.ico",
-          "apps/tower-monitor/src/assets"
+          "apps/tower-monitor/src/assets",
+          {
+            "input": "libs/slots/src/assets",
+            "glob": "**/*",
+            "output": "assets"
+          }
         ],
         "styles": [
-          "node_modules/primeng/resources/themes/lara-light-blue/theme.css",
+          "node_modules/primeng/resources/themes/lara-light-teal/theme.css",
           "node_modules/primeng/resources/primeng.min.css",
           "apps/tower-monitor/src/styles.scss"
         ],
