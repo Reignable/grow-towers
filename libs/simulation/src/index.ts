@@ -1,3 +1,5 @@
+export * from './growth-job'
 export * from './growth-job-name'
+export * from './growth-tray'
 export * from './slot'
 export * from './tower.service'
