@@ -2,6 +2,7 @@
   "root": true,
   "ignorePatterns": ["**/*"],
   "plugins": ["@nx"],
+
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
@@ -23,8 +24,30 @@
     },
     {
       "files": ["*.ts", "*.tsx"],
-      "extends": ["plugin:@nx/typescript"],
-      "rules": {}
+      "extends": [
+        "eslint:recommended",
+        "plugin:@nx/typescript",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@angular-eslint/recommended",
+        "plugin:@angular-eslint/template/process-inline-templates",
+        "airbnb-base",
+        "airbnb-typescript/base"
+      ],
+      "rules": {
+        "@typescript-eslint/semi": "off",
+        "import/prefer-default-export": "off",
+        "import/group-exports": "error",
+        "implicit-arrow-linebreak": "off",
+        "arrow-parens": "off",
+        "import/no-extraneous-dependencies": "off",
+        "no-restricted-syntax": [
+          "error",
+          {
+            "selector": "ExportDefaultDeclaration",
+            "message": "Prefer named exports"
+          }
+        ]
+      }
     },
     {
       "files": ["*.js", "*.jsx"],
