@@ -1,2 +1,2 @@
-<p>towers works!</p>
+<h2>Current Towers</h2>
 <a *ngFor="let tower of towers$ | async" [routerLink]="[tower.number]">Tower {{tower.number}}</a>
