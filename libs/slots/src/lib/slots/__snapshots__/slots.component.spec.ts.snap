@@ -1,0 +1,46 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SlotsComponent Can sort jobs by job type 1`] = `
+[
+  " GT A1  Basil 10%",
+  " GT A5  Basil 99%",
+  " GT A10  Basil 42%",
+  " GT A7  Kale 24%",
+  " GT A8  Lettuce 30%",
+  " GT A2  Rocket 20%",
+  " GT A4  Strawberry 100%",
+  " GT A6  Strawberry 15%",
+  " GT A3  Tomato 0%",
+  " GT A9  Tomato 13%",
+]
+`;
+
+exports[`SlotsComponent Can sort jobs by number 1`] = `
+[
+  " GT A1  Basil 10%",
+  " GT A2  Rocket 20%",
+  " GT A3  Tomato 0%",
+  " GT A4  Strawberry 100%",
+  " GT A5  Basil 99%",
+  " GT A6  Strawberry 15%",
+  " GT A7  Kale 24%",
+  " GT A8  Lettuce 30%",
+  " GT A9  Tomato 13%",
+  " GT A10  Basil 42%",
+]
+`;
+
+exports[`SlotsComponent Can sort jobs by progress 1`] = `
+[
+  " GT A4  Strawberry 100%",
+  " GT A5  Basil 99%",
+  " GT A10  Basil 42%",
+  " GT A8  Lettuce 30%",
+  " GT A7  Kale 24%",
+  " GT A2  Rocket 20%",
+  " GT A6  Strawberry 15%",
+  " GT A9  Tomato 13%",
+  " GT A1  Basil 10%",
+  " GT A3  Tomato 0%",
+]
+`;

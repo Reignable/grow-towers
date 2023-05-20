@@ -1,4 +1,4 @@
-<p-card header="{{slot.growthTray?.identifier || 'Slot Empty'}}" subheader="{{slot.growthTray?.growthJob?.name}}">
+<p-card role="listitem" header="{{slot.growthTray?.identifier || 'Slot Empty'}}" subheader="{{slot.growthTray?.growthJob?.name}}">
   <img [src]="'/assets/img/'+slot.growthTray?.growthJob?.name + '.svg'" />
   <p-progressBar [value]="slot.growthTray?.growthJob?.progressPercentage"/>
 </p-card>
