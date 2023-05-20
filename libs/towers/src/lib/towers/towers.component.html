@@ -1,2 +1,2 @@
-<h2>Current Towers</h2>
-<a *ngFor="let tower of towers$ | async" [routerLink]="[tower.number]">Tower {{tower.number}}</a>
+<p-tabMenu [model]="$any(tabs$ | async) ?? []"></p-tabMenu>
+<router-outlet></router-outlet>

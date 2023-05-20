@@ -6,9 +6,11 @@ export const towersRoutes: Route[] = [
   {
     path: '',
     component: TowersComponent,
-  },
-  {
-    path: ':towerNumber',
-    component: TowerComponent,
+    children: [
+      {
+        path: ':towerNumber',
+        component: TowerComponent,
+      },
+    ],
   },
 ]
