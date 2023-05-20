@@ -40,6 +40,7 @@
         "implicit-arrow-linebreak": "off",
         "arrow-parens": "off",
         "function-paren-newline": "off",
+        "object-curly-newline": "off",
         "import/no-extraneous-dependencies": "off",
         "no-restricted-syntax": [
           "error",
