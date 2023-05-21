@@ -1,4 +1,6 @@
-<p-card role="listitem" header="{{slot.growthTray?.identifier || 'Slot Empty'}}" subheader="{{slot.growthTray?.growthJob?.name}}">
-  <img [src]="'/assets/img/'+slot.growthTray?.growthJob?.name + '.svg'" />
-  <p-progressBar [value]="slot.growthTray?.growthJob?.progressPercentage"/>
+<p-card role="listitem" [header]="header" [subheader]="subheader">
+  <ng-container *ngIf="growthJobName">
+    <img [src]="'/assets/img/'+ growthJobName + '.svg'" />
+    <p-progressBar [value]="growthJobProgressPercentage"/>
+  </ng-container>
 </p-card>

@@ -1,20 +1,36 @@
-import { GrowthJob, GrowthTray, Slot } from '@grow-towers/simulation'
 import { render, screen } from '@testing-library/angular'
 import { SlotCardComponent } from './slot-card.component'
 
 describe(SlotCardComponent, () => {
   it('Shows information about the given slot', async () => {
-    const identifier = 'IDENTIFIER'
-    const name = 'Strawberry'
-    const progress = 42
-    const slot = new Slot(1, new GrowthTray(identifier, new GrowthJob(name, progress)))
+    const growthTrayIdentifier = 'IDENTIFIER'
+    const growthJobName = 'Strawberry'
+    const growthJobProgressPercentage = 42
     await render(SlotCardComponent, {
       componentInputs: {
-        slot,
+        growthJobName,
+        growthJobProgressPercentage,
+        growthTrayIdentifier,
       },
     })
-    expect(screen.getByText(identifier)).toBeInTheDocument()
-    expect(screen.getByText(name)).toBeInTheDocument()
-    expect(screen.getByText(`${progress}%`)).toBeInTheDocument()
+    expect(screen.getByRole('listitem').textContent).toMatchInlineSnapshot(
+      '" IDENTIFIER  Strawberry 42%"',
+    )
+  })
+
+  it('Displays information when no growth tray is present', async () => {
+    await render(SlotCardComponent)
+    expect(screen.getByRole('listitem').textContent).toMatchInlineSnapshot('" Empty slot "')
+  })
+
+  it('Displays information when no growth job is present', async () => {
+    await render(SlotCardComponent, {
+      componentInputs: {
+        growthTrayIdentifier: 'IDENTIFIER',
+      },
+    })
+    expect(screen.getByRole('listitem').textContent).toMatchInlineSnapshot(
+      '" IDENTIFIER  No current growth job "',
+    )
   })
 })

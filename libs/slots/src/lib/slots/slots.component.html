@@ -4,5 +4,7 @@
 </div>
 <grow-towers-slot-card
   *ngFor="let slot of sortedSlots$ | async; trackBy: trackBySlotNumber"
-  [slot]="slot"
+  [growthJobName]="slot.growthTray?.growthJob?.name"
+  [growthJobProgressPercentage]="slot.growthTray?.growthJob?.progressPercentage"
+  [growthTrayIdentifier]="slot.growthTray?.identifier"
 />
