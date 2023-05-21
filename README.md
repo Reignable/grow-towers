@@ -4,7 +4,7 @@ This is a project for UI which display a simulated vertical farm. The farm has t
 
 Currently there is only the Tower Monitor application available.
 
-## ⚒️ Technologies Used
+## 📚 Libraries Used
 
 - Production Dependencies
   - [Angular V16](https://angular.io/)
@@ -21,7 +21,7 @@ Currently there is only the Tower Monitor application available.
 
 ## 🏃‍♂️Running
 
-To get set up ensure you have [node](https://nodejs.org/en) and [npm](https://www.npmjs.com/) installed on your system. This project was created using node v16.17.0 but any latest should also work.
+To get set up ensure you have [node](https://nodejs.org/en) and [npm](https://www.npmjs.com/) installed. This project was created using node v16.17.0 but any latest should also work.
 
 Once those are available, install the dependencies.
 
@@ -43,6 +43,12 @@ $ nx serve tower-monitor
 
 Otherwise any of the nx cli commands can be used as normal.
 
+Alternatively a global installation of NX can be avoided by using NPX
+
+```
+$ npx nx serve tower-monitor
+```
+
 ## 🧪 Tests
 
 There's a small Jest test suite for some of the components. Run this with
@@ -55,7 +61,7 @@ Tests are written using Testing Library Angular for rendering components and sel
 
 ## 🤔 Assumptions
 
-From the data and code provided the user persona of a worker at a tower site was assumed. Someone who requires an overview of the current status of each tower but does not require finer grained detail on each job in each slot. This could be a lead research scientist if the towers are being used for a research project or a lead farmer if in a more commercial setting.
+From the simulation data and code, the user persona of a worker at a tower site was assumed as the data does not include fine grained detail of each slot. Someone who requires an overview of the current status of each tower but does not require drill down in each slot. This could be a lead research scientist if the towers are being used for a research project or a lead farmer if in a more commercial setting.
 
 Following this no other assumptions were made.
 
@@ -67,9 +73,11 @@ The `towers` module is federated. This is because when entering the app this may
 
 In a larger scale application this could be changed when there are more potential user personas and different types of task which could be completed.
 
-## 🎣 Gotchas
+## ✂️ Shortcuts
 
-The largest issue discovered is with the PrimeNG components and testing. The filter and sort components for the slots list couldn't be interacted with using Testing Library User Event and selectors.
+### PrimeNG and Testing
+
+The largest shortcut required is with the PrimeNG components and testing. The filter and sort components for the slots list couldn't be interacted with using Testing Library User Event and selectors.
 
 Usually a dropdown item would be selected in a test using
 
@@ -88,3 +96,20 @@ fixture.componentInstance.formControl.setValue('Some option')
 This works though is not ideal as the full connection between the UI component and the form control is uncovered and the event is not triggered from a user's perspective in an accessible way.
 
 This was my first time using PrimeNG and finding this was disappointing as I thought it was a good usable library but this issue would probably steer me away in future.
+
+### Styling and Usability
+
+Improvements could be made to the styling in making the UI more responsive to different screen sizes and improving user feedback on selecting a tower and waiting for data to show. These were left out to add features like the slot list filtering as providing this offers more value to the user.
+
+## 🚢 Path to Production
+
+The following steps could be taken to make this app production ready:
+
+- Containerise the app so it can be deployed and served in any environment
+- Adapt it so data is fetched from a backend server
+  - The addition of this would require handling loading and server error states
+  - To allow for automatic updating of the UI this could be done using websockets or GraphQL subscriptions rather than polling a REST endpoint
+- Improve accessibility
+  - Allow animations to be disabled and auto updating to be paused - this is key for users with ADHD as excessive animations can be distracting
+  - Provide a high contrast color theme - To improve usability for users with visual impairments
+- Add more tests to validate all functionality and cover any potential bugs
