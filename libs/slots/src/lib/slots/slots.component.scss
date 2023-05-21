@@ -1,8 +1,13 @@
-:host, .controls {
+:host, .controls, .slot-list {
   display: flex;
   gap: 1rem;
 }
 
-:host {
+:host, .slot-list {
   flex-direction: column;
+}
+
+.slot-list {
+  padding: 0;
+  list-style: none;
 }

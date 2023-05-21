@@ -2,9 +2,16 @@
   <grow-towers-growth-job-filter [control]="growthJobNameFilter" />
   <grow-towers-slots-sort [control]="slotSort" />
 </div>
-<grow-towers-slot-card
-  *ngFor="let slot of sortedSlots$ | async; trackBy: trackBySlotNumber"
-  [growthJobName]="slot.growthTray?.growthJob?.name"
-  [growthJobProgressPercentage]="slot.growthTray?.growthJob?.progressPercentage"
-  [growthTrayIdentifier]="slot.growthTray?.identifier"
-/>
+<ng-container *ngIf="sortedSlots$ | async as sortedSlots">
+  <p *ngIf="!sortedSlots.length; else slotList">No slots matching filter</p>
+  <ng-template #slotList>
+    <ul class="slot-list">
+      <grow-towers-slot-card
+        *ngFor="let slot of sortedSlots; trackBy: trackBySlotNumber"
+        [growthJobName]="slot.growthTray?.growthJob?.name"
+        [growthJobProgressPercentage]="slot.growthTray?.growthJob?.progressPercentage"
+        [growthTrayIdentifier]="slot.growthTray?.identifier"
+      />
+    </ul>
+  </ng-template>
+</ng-container>
