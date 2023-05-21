@@ -10,6 +10,10 @@ import { combineLatest, map, startWith, switchMap } from 'rxjs'
 import { SlotCardComponent } from '../slot-card/slot-card.component'
 import { GrowthJobFilterComponent } from './growth-job-filter/growth-job-filter.component'
 import { SlotsSortComponent } from './slots-sort/slots-sort.component'
+import { SlotSortValue } from './slot-sort-value'
+
+const GROWTH_JOB_NAME_FILTER_DEFAULT_VALUE = null
+const SLOT_SORT_DEFAULT_VALUE = SlotSortValue.NUMBER
 
 const trackBySlotNumber = (index: number, slot: Slot): number => slot.number
 
@@ -39,11 +43,11 @@ export class SlotsComponent {
     map(tower => tower?.slots),
   )
 
-  growthJobNameFilter = new FormControl<GrowthJobName | null>(null)
+  growthJobNameFilter = new FormControl<GrowthJobName | null>(GROWTH_JOB_NAME_FILTER_DEFAULT_VALUE)
 
   filteredSlots$ = combineLatest([
     this.slots$,
-    this.growthJobNameFilter.valueChanges.pipe(startWith(null)),
+    this.growthJobNameFilter.valueChanges.pipe(startWith(GROWTH_JOB_NAME_FILTER_DEFAULT_VALUE)),
   ]).pipe(
     map(([slots, growthJobNameFilter]) => {
       if (!growthJobNameFilter) return slots
@@ -51,15 +55,19 @@ export class SlotsComponent {
     }),
   )
 
-  slotSort = new FormControl<string>('number', { nonNullable: true })
+  slotSort = new FormControl<SlotSortValue>(SLOT_SORT_DEFAULT_VALUE, { nonNullable: true })
 
   sortedSlots$ = combineLatest([
     this.filteredSlots$,
-    this.slotSort.valueChanges.pipe(startWith('number')),
+    this.slotSort.valueChanges.pipe(startWith(SLOT_SORT_DEFAULT_VALUE)),
   ]).pipe(
     map(([slots, slotSort]) => {
       if (!slotSort) return slots
-      return orderBy(slots, slotSort, slotSort.includes('Percentage') ? 'desc' : 'asc')
+      return orderBy(
+        slots,
+        slotSort,
+        slotSort === SlotSortValue.GROWTH_JOB_PROGRESS ? 'desc' : 'asc',
+      )
     }),
   )
 }
